@@ -23,6 +23,9 @@
         <% if notice %>
             <%= render "layouts/alerts" %>
         <% end %>
+        <% if alert %>
+            <%= render "layouts/alert" %>
+        <% end %>
   </header>
   <div class="container">
         <%= yield %>
