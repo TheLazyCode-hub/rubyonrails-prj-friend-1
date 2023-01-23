@@ -1,27 +1,14 @@
-<div id="<%= dom_id friend %>">
-  <p>
-    <strong>First name:</strong>
-    <%= friend.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= friend.last_name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= friend.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= friend.phone %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= friend.address %>
-  </p>
-
-</div>
+<% @@id += 1 %>
+<tr id="<%= dom_id friend %>">
+      <th scope="row"><%= @@id %></th>
+      <td> <%= friend.first_name %></td>
+      <td> <%= friend.last_name %></td>
+      <td> <%= friend.email %></td>
+      <td> <%= friend.phone %></td>
+      <td> <%= friend.address %></td>
+      <td class="d-flex flex-row"> 
+          <%= link_to "Show", friend, class:"btn btn-outline-info btn-sm" %>
+          <%= link_to "Edit", edit_friend_path(friend), class:"btn btn-outline-secondary btn-sm ml-2" %>
+          <%= button_to "Delete", friend, method: :delete, class:"btn btn-outline-danger btn-sm ml-2" %>
+      </td>
+</tr>

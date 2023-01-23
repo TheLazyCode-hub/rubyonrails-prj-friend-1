@@ -1,10 +1,34 @@
-<p style="color: green"><%= notice %></p>
+<%
+=begin%>
+ <p style="color: green"><%= notice %></p> 
+<%
+=end%>
 
-<%= render @friend %>
+<div class="jumbotron">
+  <h1 class="display-4">
+      Hello,
+  </h1>
+  <h1 class="display-5">
+    <%= @friend.first_name %> <%= @friend.last_name %>
+  </h1>
+  <p class="lead"><%= @friend.email %> | <%= @friend.phone %> </p>
+  <hr class="my-2">
+  <p><%= @friend.address %></p>
+    
+    <div class="d-flex flex-row">
+    <%= link_to "Edit this friend", edit_friend_path(@friend), class:"btn btn-dark" %>
+    <%= button_to "Destroy this friend", @friend, method: :delete, class:"btn btn-danger ml-3" %>
+    </div>
+</div>
+<%
+
+
+=begin%>
+ 
+<%= render @friend %> 
+<%
+=end%>
 
 <div>
-  <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
-  <%= link_to "Back to friends", friends_path %>
-
-  <%= button_to "Destroy this friend", @friend, method: :delete %>
+<%= link_to "Back to friends", friends_path, class:"btn btn-secondary ml-2" %>
 </div>
