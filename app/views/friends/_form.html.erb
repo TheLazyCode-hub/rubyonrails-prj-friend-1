@@ -1,20 +1,36 @@
-<%= form_with(model: friend) do |form| %>
+<%= form_with(model: friend, data: {turbo: false}) do |form| %>
   <% if friend.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:</h2>
 
-      <ul>
+      <%
+=begin%>
+ <ul>
         <% friend.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
-      </ul>
+      </ul> 
+<%
+=end%>
+
+          <% is_first_name_invalid =  friend.errors.include?(:first_name) %> 
+          <% is_email_invalid = friend.errors.include?(:email) %>
+          <% is_phone_invalid = friend.errors.include?(:phone) %> 
+          <% is_address_invalide = friend.errors.include?(:address) %>
     </div>
   <% end %>
 
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <%= form.label :first_name %>
-      <%= form.text_field :first_name, class:"form-control" %>
+      <%= form.text_field :first_name, class:"form-control #{'is-invalid' if is_first_name_invalid}", :required=> true %>
+      <% if is_first_name_invalid %>
+          <div class="invalid-feedback d-block">
+            <% friend.errors.full_messages_for(:first_name).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+       <% end %>
     </div>
     <div class="col-md-6 mb-3">
       <%= form.label :last_name %>
@@ -24,17 +40,38 @@
 
   <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, class:"form-control", placeholder:"name@email.com" %>
+    <%= form.text_field :email, class:"form-control  #{'is-invalid' if is_email_invalid}", placeholder:"name@email.com", :required=> true %>
+    <% if is_email_invalid %>
+          <div class="invalid-feedback d-block">
+            <% friend.errors.full_messages_for(:email).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+       <% end %>
   </div>
 
   <div class="form-group">
     <%= form.label :phone %>
-    <%= form.text_field :phone, class:"form-control", placeholder:"123-456-7890" %>
+    <%= form.text_field :phone, class:"form-control #{'is-invalid' if is_phone_invalid}", placeholder:"123-456-7890", :required=> true %>
+    <% if is_phone_invalid %>
+          <div class="invalid-feedback d-block">
+            <% friend.errors.full_messages_for(:phone).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+       <% end %>
   </div>
 
   <div class="form-group">
     <%= form.label :address %>
-    <%= form.text_field :address, class:"form-control", placeholder:"Address" %>
+    <%= form.text_field :address, class:"form-control #{'is-invalid' if is_address_invalide}", placeholder:"Address", :required=> true %>
+    <% if is_address_invalide %>
+          <div class="invalid-feedback d-block">
+            <% friend.errors.full_messages_for(:address).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+       <% end %>
   </div>
 
    <div class="form-group">
