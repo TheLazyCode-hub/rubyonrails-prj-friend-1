@@ -3,27 +3,37 @@
  <p style="color: green"><%= notice %></p> 
 <%
 =end%>
-
+<% if user_signed_in?%>
 <h1>Friends List</h1>
 
 <div id="friends">
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped  table-bordered">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
+      <th scope="col">Name</th>
+      <%
+=begin%>
+ <th scope="col">Last Name</th> 
+<%
+=end%>
       <th scope="col">Email</th>
       <th scope="col">Phone number</th>
       <th scope="col">Address</th>
-      <th scope="col">Created By</th>   
+      <%
+=begin%>
+ <th scope="col">Created By</th>    
+<%
+=end%>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% @id = 0%>
     <% @friends.each do |friend| %>
+    <% if friend.user == current_user %>
     <%= render friend %>
+    <% end %>
     <%
 =begin%>
  <p>
@@ -38,3 +48,7 @@
 </div>
 
 <%= link_to "New friend", new_friend_path, class:"btn btn-secondary" %>
+
+<% else %>
+<%= render :template => 'home/index'  %>
+<% end %>

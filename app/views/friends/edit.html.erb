@@ -5,6 +5,14 @@
 <br>
 
 <div>
-  <%= link_to "Show this friend", @friend, class:"btn btn-secondary" %>
-  <%= link_to "Back to friends", friends_path, class:"btn btn-dark ml-3"  %>
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-row">
+        <%= link_to "Show this friend", @friend, class:"btn btn-secondary" %>
+        <%= button_to "Delete Friend", @friend, method: :delete, class:"btn btn-danger ml-3" %>
+    </div>
+    <div class="mt-2">
+        <%= link_to "Back to friends", friends_path, class:"btn btn-dark"  %>
+    </div>
+  </div>
+  
 </div>
