@@ -1,11 +1,15 @@
 <div class="container mt-4">
-<div class="card">
+<div class="card border-0 shadow">
   <div class="card-header">
     Login
   </div>
   <div class="card-body">
     
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),  data: { turbo: false }) do |f| %>
+
+<%= render "devise/shared/error_messages", resource: resource %>
+
+
   <div class="field form-group">
     <%= f.label :login %><br />
     <%= f.text_field :login, autofocus: true,  class:"form-control" %>
